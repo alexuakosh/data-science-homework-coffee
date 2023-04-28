@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 df = pd.read_csv('coffee_ratings.csv')
 # pd.set_option('display.max_columns', None)
 
-"""2. Какие страны являются крупными экспортерами кофе?"""
+"""1. Which countries are the largest exporters of coffee?"""
 # pd.set_option('display.max_rows', None)
 
 def convert_lb_to_kg(weight):
@@ -29,7 +29,7 @@ labels = modified_df.head(7).index
 plt.bar(labels, modified_df.head(7)['weight_by_country'])
 plt.show()
 
-"""3. Каковы корреляции между различными показателями оценки кофе?"""
+"""2. What correlations between different indicators of coffee assessment?"""
 plt.subplots(figsize=(20, 7))
 
 def create_plot(df_arg, key):
@@ -52,7 +52,7 @@ between flavor and balance grades and also between acidity, body and aroma grade
 But we can say that there is some correlation between all grades."""
 
 
-"""4. Как (если есть) влияние цвета зерен на общий сорт кофе?"""
+"""3. How (if) color affects on common sort of coffee?"""
 # pd.set_option('display.max_rows', None)
 arabica_green = len(df[(df['species'] == 'Arabica') & (df['color'] == 'Green')])
 # print(arabica_green)
@@ -82,7 +82,7 @@ plt.show()
 Both species have approx. equal percentage of products of both colors."""
 
 
-"""5. Влияет ли страна происхождения на качество кофе?"""
+"""4. Does country affects on quality of coffee?"""
 country_with_rating_df = df.groupby('country_of_origin').agg(mean_rating=('total_cup_points', 'mean')).sort_values(by='mean_rating', ascending=False)
 # print(country_with_rating_df)
 plt.bar(country_with_rating_df.head(5).index, country_with_rating_df.head(5)['mean_rating'])
@@ -94,7 +94,7 @@ plt.show()
 (maybe non-significant) influence of country to quality of coffee"""
 
 
-"""6. Существенно ли влияет высота на качество кофе?"""
+"""5. If there is significant influence of height on quality of coffee?"""
 pd.set_option('display.max_rows', None)
 sorted_by_rating_df = df.dropna(subset=['altitude_low_meters', 'altitude_mean_meters', 'altitude_high_meters'])\
     .sort_values(by='total_cup_points', ascending=False)
